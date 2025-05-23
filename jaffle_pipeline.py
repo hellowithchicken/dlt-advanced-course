@@ -21,6 +21,8 @@ def jaffle_store_source(chunking=True, parallelized=False):
             if chunking:
                 yield_no += 1
                 print(f"""customers: Yielding no {yield_no}""")
+                if yield_no > 1:
+                    break # this is to speed things up for testing
                 yield page
             else:
                 for i in page:
@@ -38,6 +40,8 @@ def jaffle_store_source(chunking=True, parallelized=False):
             print(f"orders in thread {current_thread().name}")
             if chunking:
                 yield_no += 1
+                if yield_no > 1:
+                    break # this is to speed things up for testing
                 print(f"""orders: Yielding no {yield_no}""")
                 yield page
             else:
@@ -53,6 +57,8 @@ def jaffle_store_source(chunking=True, parallelized=False):
             print(f"products in thread {current_thread().name}")
             if chunking:
                 yield_no += 1
+                if yield_no > 1:
+                    break # this is to speed things up for testing
                 print(f"""products: Yielding no {yield_no}""")
                 yield page
             else:
@@ -68,9 +74,9 @@ def jaffle_store_source(chunking=True, parallelized=False):
 if __name__ == "__main__":
 
     pipeline = dlt.pipeline(
-        pipeline_name="jaffle_store",
+        pipeline_name="jaffle_store_1",
         destination="duckdb",
-        dataset_name="jaffle_store",
+        dataset_name="jaffle_store_12",
     )
 
     load_info = pipeline.run(jaffle_store_source(chunking=True, parallelized=False))
