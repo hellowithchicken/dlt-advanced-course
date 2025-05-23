@@ -125,27 +125,9 @@ for chunking in [True, False]:
         time_ = measure_extract_time_parallel(chunking=chunking, parallelized=False, measure="extract")
         time_chunking[chunking].append(time_)
 
-# Resuls for chunking: {True: [[45.93333053588867]], False: [[45.79884648323059]]}
-# The results are even worse for chuking. Probably because the data sizes are small. The experiment should be ran more times.
-# If the APIs were returning more data chunking would have been more useful.
-
 # %%
 # Try parelelization, twice
 times = [measure_extract_time_parallel(chunking=True, parallelized=True, measure="extract") for i in range(2)]
-# Results: times=[[67.84752178192139], [73.70786118507385]]
-# Here results are again worse than the ones we saw in the previous experiment that was not parallelized.
-# It seems that the extraction jobs are relatively quick so the overhead of managing thread is not worth it.
-# This would be more useful if we had resources that were bigger. Now the extract for customers and products
-# finish way before the one for orders. so parallelization looses point as there are no more resources to cycle
-# between.
-
-### Conclusion
-# Chunking really did not show significant change in run time. Parallelization made things worse.
-# small data sizes also play a role. Chunking may have much higher impect with bigger data sizes. 
-# We only have  <1000 rows in customers, < 100 in products, <8400 in orders
-# Paralellisation would have helped if resources customers and products were yielding more cause
-# now everything is consumed by orders.
-# Moving forwards: parallelized = False, chuking = True (because of cleaner code)
 
 
 ############################################################
