@@ -107,4 +107,5 @@ plt.show()
 
 # Parameters I'd select: 
 # DATA_WRITER__BUFFER_MAX_ITEMS=10000, EXTRACT__DATA_WRITER__FILE_MAX_ITEMS=1000, NORMALIZE__DATA_WRITER__FILE_MAX_ITEMS=1000
+# Experiment with these settings ran in 48.19 seconds.
 # %%
