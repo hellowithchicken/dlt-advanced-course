@@ -1,0 +1,3 @@
+# please provide valid dependencies including dlt package
+dlt[duckdb]>=1.8.1
+dlt[cli]
